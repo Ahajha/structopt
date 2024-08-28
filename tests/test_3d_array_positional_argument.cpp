@@ -1,5 +1,5 @@
 #include <structopt/app.hpp>
-#include <doctest.hpp>
+#include <doctest/doctest.h>
 
 using doctest::test_suite;
 

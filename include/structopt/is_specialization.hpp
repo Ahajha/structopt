@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include <type_traits>
+
 namespace structopt {
 
 template <typename Test, template <typename...> class Ref>

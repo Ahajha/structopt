@@ -271,3 +271,9 @@ analysis-cppcheck-build-dir
 ideas
 
 desktop.iniimages/
+
+# Clangd cache
+.cache
+
+# Conan generated presets file
+CMakeUserPresets.json

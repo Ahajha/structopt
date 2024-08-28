@@ -15,11 +15,6 @@ else()
   project(structopt VERSION 0.1.2 LANGUAGES CXX)
 endif()
 
-if(EXISTS "${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
-  include("${CMAKE_BINARY_DIR}/conanbuildinfo.cmake")
-  conan_basic_setup()
-endif()
-
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   if (MSVC_VERSION GREATER_EQUAL "1900")
     include(CheckCXXCompilerFlag)
@@ -38,6 +33,11 @@ include(GNUInstallDirs)
 
 add_library(structopt INTERFACE)
 add_library(structopt::structopt ALIAS structopt)
+
+find_package(magic_enum REQUIRED)
+find_package(visit_struct REQUIRED)
+
+target_link_libraries(structopt INTERFACE magic_enum::magic_enum visit_struct::visit_struct)
 
 target_compile_features(structopt INTERFACE cxx_std_17)
 target_include_directories(structopt INTERFACE

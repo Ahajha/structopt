@@ -13,9 +13,7 @@ elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -pedantic")
 endif()
 
-if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Release)
-endif()
+find_package(doctest REQUIRED)
 
 # Disable deprecation for windows
 if (WIN32)
@@ -58,7 +56,7 @@ set_source_files_properties(main.cpp
     PROPERTIES
     COMPILE_DEFINITIONS DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN)
 ADD_EXECUTABLE(structopt_tests ${structopt_TEST_SOURCES})
-INCLUDE_DIRECTORIES("../include" ".")
+target_link_libraries(structopt_tests PRIVATE structopt doctest::doctest)
 set_target_properties(structopt_tests PROPERTIES OUTPUT_NAME structopt_tests)
 set_property(TARGET structopt_tests PROPERTY CXX_STANDARD 17)
 
